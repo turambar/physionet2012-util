@@ -27,13 +27,12 @@ seta = seta - test
 invalid.update(seta)
 np.random.shuffle(list(train))
 record_no = 0
-os.makedirs(os.path.join('sequence'))
-os.makedirs(os.path.join('resampled'))
-os.makedirs(os.path.join('mortality'))
-os.makedirs(os.path.join('los'))
-os.makedirs(os.path.join('los_bucket'))
-os.makedirs(os.path.join('survival'))
-os.makedirs(os.path.join('survival_bucket'))
+
+for dirname in [ 'sequence', 'resampled', 'features', 'mortality', 'los', 'los_bucket', 'survival', 'survival_bucket' ]:
+    try:
+        os.makedirs(dirname)
+    except:
+        pass
 for records in [ train, test, invalid ]:
     for pid in tqdm(records):
         fn = os.path.join('./set-a', str(pid) + '.txt')
