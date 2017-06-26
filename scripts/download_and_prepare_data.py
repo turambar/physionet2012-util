@@ -1,4 +1,5 @@
 import glob
+import json
 import numpy as np
 import os
 import pandas as pd
@@ -17,7 +18,11 @@ download_set_a()
 download_set_b()
 download_set_a_targets()
 stats = compute_statistics()
+with open('statistics.json', 'w') as f:
+    json.dump(stats, f, indent=1, sort_keys=True)
 transforms = convert_stats_to_rescale_transform(stats)
+with open('transforms.json', 'w') as f:
+    json.dump(transforms, f, indent=1, sort_keys=True)
 
 seta = set([ int(fn.split('/')[-1].replace('.txt', '')) for fn in glob.glob(os.path.join('set-a', '*.txt')) ])
 targets = read_and_prep_targets('.')
