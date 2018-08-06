@@ -46,6 +46,7 @@ for records in [ train, test, invalid ]:
         record = pivot_record(record, var_names=transforms.keys())
         record = apply_transforms(record, transforms)
         record = convert_time(record)
+        record = add_missing_columns(record, stats.keys())
         missing = get_missing_indicators(record)
 
         resampled = resample_hourly(record)

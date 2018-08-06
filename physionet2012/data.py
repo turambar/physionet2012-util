@@ -148,6 +148,13 @@ def convert_time(record):
     return record
 
 
+def add_missing_columns(record, columns):
+    for col in columns:
+        if col not in record.columns:
+            record[col] = np.nan
+    return record
+
+
 def resample_hourly(record):
     resampled = record.resample('1H', closed='left', label='left', on='Time').mean()
     del resampled['Elapsed']
