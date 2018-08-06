@@ -150,7 +150,7 @@ def convert_time(record):
 
 def add_missing_columns(record, columns):
     for col in columns:
-        if col not in record.columns:
+        if col not in record.columns and col != 'Gender' and col != 'ICUType':
             record[col] = np.nan
     return record
 
